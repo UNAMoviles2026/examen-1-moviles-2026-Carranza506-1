@@ -51,7 +51,10 @@ fun SpaceCard(
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            Button(onClick = onClick) {
+            Button(onClick = {
+                println("CLICKED")
+                onClick()
+            }) {
                 Text("View Details")
             }
         }

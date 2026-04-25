@@ -18,7 +18,6 @@ fun AppNavHost() {
         startDestination = "home"
     ) {
 
-        // 🏠 HOME
         composable("home") {
             HomeScreen(
                 onSpaceClick = { spaceId ->
@@ -27,7 +26,6 @@ fun AppNavHost() {
             )
         }
 
-        // 🔍 DETAIL
         composable(
             route = "detail/{spaceId}",
             arguments = listOf(

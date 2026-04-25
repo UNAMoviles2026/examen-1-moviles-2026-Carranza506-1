@@ -20,13 +20,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.moviles.examenmoviles.data.Space
 import com.moviles.examenmoviles.ui.components.AvailabilityBadge
 import com.moviles.examenmoviles.ui.components.BottomBar
 import com.moviles.examenmoviles.ui.components.PriceText
-import com.moviles.examenmoviles.ui.theme.ExamenMovilesTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -46,7 +44,13 @@ fun DetailScreen(
         bottomBar = {
             BottomBar(
                 selected = selectedTab,
-                onItemSelected = { selectedTab = it }
+                onItemSelected = { route ->
+                    selectedTab = route
+
+                    if (route == "home") {
+                        onNavigateHome()
+                    }
+                }
             )
         }
     ) { padding ->
@@ -69,13 +73,10 @@ fun DetailScreen(
             Spacer(modifier = Modifier.height(12.dp))
 
             Text(space.description)
-
             Text("Location: ${space.location}")
-
             Text("Capacity: ${space.capacity}")
 
             PriceText(space.pricePerHour)
-
             AvailabilityBadge(space.available)
 
             Spacer(modifier = Modifier.height(16.dp))

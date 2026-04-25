@@ -43,7 +43,7 @@ fun HomeScreen(
                 SpaceCard(
                     space = space,
                     onClick = {
-
+                        onSpaceClick(space.id)
                     }
                 )
 
