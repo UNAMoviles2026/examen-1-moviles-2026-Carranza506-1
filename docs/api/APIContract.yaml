@@ -1,0 +1,81 @@
+openapi: 3.0.0
+info:
+  title: Coworking API
+  version: 1.0.0
+
+paths:
+
+  /reservations:
+    post:
+      summary: Create a reservation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - userId
+                - spaceId
+                - date
+                - hours
+              properties:
+                userId:
+                  type: integer
+                spaceId:
+                  type: integer
+                date:
+                  type: string
+                  format: date
+                hours:
+                  type: integer
+      responses:
+        "201":
+          description: Reservation created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reservationId:
+                    type: integer
+                  status:
+                    type: string
+                    example: confirmed
+        "400":
+          description: Invalid data
+
+  /reservations/{id}:
+    put:
+      summary: Update reservation
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                date:
+                  type: string
+                  format: date
+                hours:
+                  type: integer
+      responses:
+        "200":
+          description: Reservation updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Reservation updated successfully
+        "404":
+          description: Reservation not found
